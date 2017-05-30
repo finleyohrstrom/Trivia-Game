@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <title>Trivia</title>
+
+  </head>
+
+  <body>
+    <div class="container">
+      <div>
+        <h1>Welcome to Trivia!</h1>
+      </div>
+      <div><button class="button" id="start">
+        Press to start, pimp!
+      </button>
+      </div>
+      <div class="timer">
+        
+      </div>
+      <div class="oneQuest">
+        <p class="question">Where do the trix go?</p>
+        <table>
+          <tr>
+            <td><button class="button" id="oneRight">The Rascally Rabbit</button></td>
+            <td><button class="button" id="oneOneWrong">The Leprachan</button></td>
+            <td><button class="button" id="oneTwoWrong">Tim Tebow</button></td>
+          </tr>
+        </table>
+      </div>
+      <div class="twoQuest">
+        <p class="question">What's your favorite type of cereal?</p>
+        <table>
+          <tr>
+            <td><button class="button" id="twoOneWrong">Trix</button></td>
+            <td><button class="button" id="twoTwoWrong">I haven't eaten any in awhile</button></td>
+            <td><button class="button" id="twoRight">I eat one meal a day. Rarely is it breakfast</button></td>
+          </tr>
+        </table>
+      </div>
+      <div class="threeQuest">
+        <p class="question">Why do i never do my homework?</p>
+        <table>
+          <tr>
+            <td><button class="button" id="threeOneWrong">Because i dont care</button></td>
+            <td><button class="button" id="threeTwoWrong">I have severe motivational issues dating back to childhood</button></td>
+            <td><button class="button" id="threeRight">Classic one, two punch- Depression, Anxiety!</button></td>
+          </tr>
+        </table>
+      </div>
+      <div class="fourQuest">
+        <p class="question">Do i feel bad about it, and in turn, myself?</p>
+        <table>
+          <tr>
+            <td><button class="button" id="fourOneWrong">No, not really!</button></td>
+            <td><button class="button" id="fourRight">Yes.</button></td>
+            <td><button class="button" id="fourTwoWrong">Who's asking the f*cking questions here?</button></td>
+          </tr>
+        </table>
+      </div>
+      <div class="fiveQuest">
+        <p class="question">What is love?</p>
+        <table>
+          <tr>
+            <td><button class="button" id="fiveOneWrong">Baby, don't hurt me</button></td>
+            <td><button class="button" id="fiveRight">Don't hurt me</button></td>
+            <td><button class="button" id="fiveTwoWrong">No more</button></td>
+          </tr>
+        </table>
+      </div>
+      <div>
+        <button class="button" id="finish">Finished!</button>
+      </div>
+    </div>
+    <style type="text/css">
+      .button {
+        color: black;
+        background-color: red;
+      }
+      .buttonClicked {
+        color: black;
+        background-color: green;
+      }
+      .container {
+        background-image: url("http://www.ricedigital.co.uk/wp-content/uploads/2015/08/tumblr_nq8b5dErHY1sapaufo1_500.gif");
+      }
+      .question {
+        color: black;
+        font-weight: bolder;
+        text-shadow: 2px 2px 5px black;
+        background-color: white;
+        padding: 10px;
+        width: 25%;
+      }
+      body {
+        background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB45NZTSHYm48HPxKuUnLwrnLvKkMqJV-Zdkskf1_hrqYWohEj");
+      }
+      div {
+        margin-left: 10%;
+        margin-right: 10%;
+      }
+      button {
+        position: center;
+      }
+    </style>
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.js"></script>
+    <script>
+
+    var time = 100
+
+    var numRight = 0
+    var numWrong = 0
+    var numSkipped = 0
+
+    var oneRight = 0
+    var oneOneWrong = 0
+    var oneTwoWrong = 0
+
+    var twoRight = 0
+    var twoOneWrong = 0
+    var twoTwoWrong = 0
+
+    var threeRight = 0
+    var threeOneWrong = 0
+    var threeTwoWrong = 0
+
+    var fourRight = 0
+    var fourOneWrong = 0
+    var fourTwoWrong = 0
+
+    var fiveRight = 0
+    var fiveOneWrong = 0
+    var fiveTwoWrong = 0
+
+      $("#start").on("click", run);
+      $("#finish").on("click", finished);
+
+      function run() {
+        intervalId = setInterval(decrement, 1000);
+        $(".button").removeClass("buttonClicked")
+      };
+
+      function decrement() {
+        time--;
+        $(".timer").html("<h2>" + time + "</h2>");
+
+        if (time === 0) {
+          stop();
+          alert("Time Up!");
+        }
+      }
+      function stop() {
+        clearInterval(intervalId);
+      };
+      $(".button").click(function(){
+        $(this).addClass("buttonClicked")
+      });
+      // function right() {
+      //   numRight++
+      //   console.log(numRight)
+      // };
+      // $("right").on("click", right)
+      // console.log(right)
+      // function wrong() {
+      //   $("#wrong").click(function(event) {
+      //     wrong++
+      //     console.log(wrong)
+      // });
+      // };
+      // var wrong = function(){
+      //   wrong++
+      //   console.log(wrong)
+      // };
+      // $("#wrong").on("click", wrong);
+
+
+      // I tried various other optimaized ways of tallying but they all were broken for reasons i did not understad, i left above so you can see. 
+      $("#oneRight").click(function() {
+        oneRight++
+        if(oneRight + oneOneWrong + oneTwoWrong > 1) {
+          return;
+        }
+        else {
+          numRight++;
+          console.log("Number Right: " + numRight)
+        }
+      });
+      $("#oneOneWrong").click(function() {
+        oneOneWrong++
+        if(oneRight + oneOneWrong + oneTwoWrong > 1) {
+          return;
+        }
+        else {
+          numWrong++;
+          console.log("Number Wrong: " + numWrong)
+        }
+      });
+      $("#oneTwoWrong").click(function() {
+        oneTwoWrong++
+        if(oneRight + oneOneWrong + oneTwoWrong > 1) {
+          return;
+        }
+        else {
+          numWrong++;
+          console.log("Number Wrong: " + numWrong)
+        }
+      });
+      $("#twoRight").click(function() {
+        twoRight++
+        if(twoRight + twoOneWrong + twoTwoWrong > 1) {
+          return;
+        }
+        else {
+          numRight++;
+          console.log("Number Right: " + numRight)
+        }
+      });
+      $("#twoOneWrong").click(function() {
+        twoOneWrong++
+        if(twoRight + twoOneWrong + twoTwoWrong > 1) {
+          return;
+        }
+        else {
+          numWrong++;
+          console.log("Number Wrong: " + numWrong)
+        }
+      });
+      $("#twoTwoWrong").click(function() {
+        twoTwoWrong++
+        if(twoRight + twoOneWrong + twoTwoWrong > 1) {
+          return;
+        }
+        else {
+          numWrong++;
+          console.log("Number Wrong: " + numWrong)
+        }
+      });
+      $("#threeRight").click(function() {
+        threeRight++
+        if(threeRight + threeOneWrong + threeTwoWrong > 1) {
+          return;
+        }
+        else {
+          numRight++;
+          console.log("Number Right: " + numRight)
+        }
+      });
+      $("#threeOneWrong").click(function() {
+        threeOneWrong++
+        if(threeRight + threeOneWrong + threeTwoWrong > 1) {
+          return;
+        }
+        else {
+          numWrong++;
+          console.log("Number Wrong: " + numWrong)
+        }
+      });
+      $("#threeTwoWrong").click(function() {
+        threeTwoWrong++
+        if(threeRight + threeOneWrong + threeTwoWrong > 1) {
+          return;
+        }
+        else {
+          numWrong++;
+          console.log("Number Wrong: " + numWrong)
+        }
+      });
+      $("#fourRight").click(function() {
+        fourRight++
+        if(fourRight + fourOneWrong + fourTwoWrong > 1) {
+          return;
+        }
+        else {
+          numRight++;
+          console.log("Number Right: " + numRight)
+        }
+      });
+      $("#fourOneWrong").click(function() {
+        fourOneWrong++
+        if(fourRight + fourOneWrong + fourTwoWrong > 1) {
+          return;
+        }
+        else {
+          numWrong++;
+          console.log("Number Wrong: " + numWrong)
+        }
+      });
+      $("#fourTwoWrong").click(function() {
+        fourTwoWrong++
+        if(fourRight + fourOneWrong + fourTwoWrong > 1) {
+          return;
+        }
+        else {
+          numWrong++;
+          console.log("Number Wrong: " + numWrong)
+        }
+      });
+      $("#fiveRight").click(function() {
+        fiveRight++
+        if(fiveRight + fiveOneWrong + fiveTwoWrong > 1) {
+          return;
+        }
+        else {
+          numRight++;
+          console.log("Number Right: " + numRight)
+        }
+      });
+      $("#fiveOneWrong").click(function() {
+        fiveOneWrong++
+        if(fiveRight + fiveOneWrong + fiveTwoWrong > 1) {
+          return;
+        }
+        else {
+          numWrong++;
+          console.log("Number Wrong: " + numWrong)
+        }
+      });
+      $("#fiveTwoWrong").click(function() {
+        fiveTwoWrong++
+        if(fiveRight + fiveOneWrong + fiveTwoWrong > 1) {
+          return;
+        }
+        else {
+          numWrong++;
+          console.log("Number Wrong: " + numWrong)
+        }
+      });
+      // var wrong = function(){
+      //   wrong++
+      //   console.log(wrong)
+      // };
+      // $("#wrong").on("click", wrong);
+
+      function finished() {
+        stop()
+        var skipTally = 5 - (numRight + numWrong)
+        alert("You have completed the quiz!" + "\nTotal Correct: " + numRight + "\nTotal Incorrect: " + numWrong + "\nTotal Skipped: " + skipTally + "\nYou got: " + numRight/5 * 100 + "%!")
+        time = 100;
+        numRight = 0
+        numWrong = 0
+        numSkipped = 0
+
+        oneRight = 0
+        oneOneWrong = 0
+        oneTwoWrong = 0
+
+        twoRight = 0
+        twoOneWrong = 0
+        twoTwoWrong = 0
+
+        threeRight = 0
+        threeOneWrong = 0
+        threeTwoWrong = 0
+
+        fourRight = 0
+        fourOneWrong = 0
+        fourTwoWrong = 0
+
+        fiveRight = 0
+        fiveOneWrong = 0
+        fiveTwoWrong = 0
+      };
+
+    </script>
+  </body> 
+</html>
